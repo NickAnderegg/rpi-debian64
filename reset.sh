@@ -3,10 +3,10 @@
 set -e -v
 
 # Umount previous image
-umount -f /mnt/sys
-umount -f /mnt/dev/pts
-umount -f /mnt/dev
-umount -f /mnt/proc
+umount -l /mnt/sys || echo "Skipping unmounting /mnt/sys..."
+umount -l /mnt/dev/pts || echo "Skipping unmounting /mnt/dev/pts..."
+umount -l /mnt/dev || echo "Skipping unmounting /mnt/dev..."
+umount -l /mnt/proc || echo "Skipping unmounting /mnt/proc..."
 
 # Remove old image and recreate
 rm -f debian-rpi64.img
