@@ -1,9 +1,11 @@
 # Install Pi-compatible WiFi drivers to image
 
+set -e -v
+
 mkdir wifi-firmware
 cd wifi-firmware
 wget https://github.com/RPi-Distro/firmware-nonfree/raw/master/brcm/brcmfmac43430-sdio.bin
-wget https://github.com/RPi-Distro/firmware-nonfree/raw/master/brcm/brcmfmac43430-sdio.clm_blob
+#wget https://github.com/RPi-Distro/firmware-nonfree/raw/4ee44af381d55bc2221cf80c1433842a48ed09e1/brcm/brcmfmac43430-sdio.clm_blob
 wget https://github.com/RPi-Distro/firmware-nonfree/raw/master/brcm/brcmfmac43430-sdio.txt
 wget https://github.com/RPi-Distro/firmware-nonfree/raw/master/brcm/brcmfmac43455-sdio.bin
 wget https://github.com/RPi-Distro/firmware-nonfree/raw/master/brcm/brcmfmac43455-sdio.clm_blob
