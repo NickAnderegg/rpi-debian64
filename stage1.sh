@@ -1,5 +1,7 @@
 # Setup ext4 root filesystem
 
+set -e
+
 qemu-debootstrap --arch=arm64 buster /mnt
 
 mount -o bind /proc /mnt/proc
@@ -34,17 +36,19 @@ deb http://ftp.debian.org/debian buster-backports main
 # Setup bootloader and kernel
 
 wget http://archive.raspberrypi.org/debian/pool/main/r/raspberrypi-firmware/raspberrypi-bootloader_1.20190925-2_armhf.deb
-mkdir /tmp/pi-bootloader/
-dpkg-deb -x raspberrypi-bootloader_1.20190925-2_armhf.deb /tmp/pi-bootloader/
+rm -rf /tmp/pi-bootloader
+mkdir -p /tmp/pi-bootloader/
+dpkg-deb -X raspberrypi-bootloader_1.20190925-2_armhf.deb /tmp/pi-bootloader/
 cp /tmp/pi-bootloader/boot/* /mnt/boot/
 rm raspberrypi-bootloader_1.20190925-2_armhf.deb
 
+echo "Downloading bcm2711-kernel..."
 wget https://github.com/sakaki-/bcm2711-kernel/releases/download/4.19.93.20200107/bcm2711-kernel-4.19.93.20200107.tar.xz
-mkdir /tmp/pi-kernel
+mkdir -p /tmp/pi-kernel
 tar xf bcm2711-kernel-4.19.93.20200107.tar.xz -C /tmp/pi-kernel/
 cp -r /tmp/pi-kernel/boot/* /mnt/boot/
-mv /mnt/boot/kernel*.img /mnt/boot/kernel8.img
-mkdir /mnt/lib/modules
+mv /mnt/boot/kernel8-p4.img /mnt/boot/kernel8.img
+mkdir -p /mnt/lib/modules
 cp -r /tmp/pi-kernel/lib/modules /mnt/lib/
 rm bcm2711-kernel-4.19.93.20200107.tar.xz
 rm -r /tmp/pi-kernel
