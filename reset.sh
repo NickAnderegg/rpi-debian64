@@ -5,7 +5,7 @@ set -e
 export DEBIAN_FRONTEND="noninteractive"
 
 apt update -q
-apt install -qy util-linux
+apt install -qy util-linux parted debootstrap xz-utils
 apt install -qy qemu-utils qemu-user-static
 
 # Umount previous image
