@@ -1,12 +1,18 @@
 #!/usr/bin/env bash
 
-set -e -v
+set -e
+
+export DEBIAN_FRONTEND="noninteractive"
+
+apt update -q
+apt install -qy util-linux
+apt install -qy qemu-utils qemu-user-static
 
 # Umount previous image
-umount -l /mnt/sys || echo "Skipping unmounting /mnt/sys..."
-umount -l /mnt/dev/pts || echo "Skipping unmounting /mnt/dev/pts..."
-umount -l /mnt/dev || echo "Skipping unmounting /mnt/dev..."
-umount -l /mnt/proc || echo "Skipping unmounting /mnt/proc..."
+umount -lq /mnt/sys || echo "Skipping unmounting /mnt/sys..."
+umount -lq /mnt/dev/pts || echo "Skipping unmounting /mnt/dev/pts..."
+umount -lq /mnt/dev || echo "Skipping unmounting /mnt/dev..."
+umount -lq /mnt/proc || echo "Skipping unmounting /mnt/proc..."
 
 # Remove old image and recreate
 rm -f debian-rpi64.img
