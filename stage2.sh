@@ -1,5 +1,6 @@
 # Apt install core packages
 
+mkdir -p /etc/defaults
 cat << EOF > /etc/defaults/console-setup
 # Consult the console-setup(5) manual page.
 ACTIVE_CONSOLES="/dev/tty[1-6]"
