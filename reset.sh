@@ -42,11 +42,11 @@ mount ${LOOP_IMG}p2 /mnt
 mkdir -p /mnt/boot
 mount ${LOOP_IMG}p1 /mnt/boot/
 
-apt-key --keyring /usr/share/keyrings/debian-archive-keyring.gpg \
+apt-key --keyring /usr/share/keyrings/debian-manual-keyring.gpg \
     adv --keyserver hkp://keyserver.ubuntu.com:80 \
     --recv-keys DCC9EFBF77E11517 DC30D7C23CBBABEE 4DFAB270CAA96DFA
 
-apt-key --keyring /usr/share/keyrings/raspbian-archive-keyring.gpg \
+apt-key --keyring /usr/share/keyrings/raspbian-manual-keyring.gpg \
     adv --keyserver hkp://keyserver.ubuntu.com:80 \
     --recv-keys 9165938D90FDDD2E
 
