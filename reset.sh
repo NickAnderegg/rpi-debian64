@@ -54,5 +54,5 @@ apt-key --keyring /usr/share/keyrings/external-archives-keyring.gpg \
     adv --keyserver hkp://keyserver.ubuntu.com:80 \
     --recv-keys CAA5E9C8755D21A0 975DC25C4E730A3C
 
-mkdir -p /mnt/usr/share/keyrings
-cp /usr/share/keyrings/{debian,raspbian,external}-*-keyring.gpg /mnt/usr/share/keyrings/
+# mkdir -p /mnt/usr/share/keyrings
+# cp /usr/share/keyrings/{debian,raspbian,external}-*-keyring.gpg /mnt/usr/share/keyrings/
