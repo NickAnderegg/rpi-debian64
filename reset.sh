@@ -13,6 +13,8 @@ umount -lq /mnt/sys || echo "Skipping unmounting /mnt/sys..."
 umount -lq /mnt/dev/pts || echo "Skipping unmounting /mnt/dev/pts..."
 umount -lq /mnt/dev || echo "Skipping unmounting /mnt/dev..."
 umount -lq /mnt/proc || echo "Skipping unmounting /mnt/proc..."
+umount -lq /mnt/boot || echo "Skipping unmounting /mnt/boot..."
+umount -lq /mnt || echo "Skipping unmounting /mnt..."
 
 # Remove old image and recreate
 rm -f debian-rpi64.img
@@ -34,8 +36,23 @@ mkfs.ext4 -L rootfs ${LOOP_IMG}p2
 
 # Make a mount point for the rootFS
 mkdir -p /mnt/
-mount /dev/loop1p2 /mnt
+mount ${LOOP_IMG}p2 /mnt
 
 # Mount the boot partition
 mkdir -p /mnt/boot
-mount /dev/loop1p1 /mnt/boot/
+mount ${LOOP_IMG}p1 /mnt/boot/
+
+apt-key --keyring /usr/share/keyrings/debian-archive-keyring.gpg \
+    adv --keyserver hkp://keyserver.ubuntu.com:80 \
+    --recv-keys DCC9EFBF77E11517 DC30D7C23CBBABEE 4DFAB270CAA96DFA
+
+apt-key --keyring /usr/share/keyrings/raspbian-archive-keyring.gpg \
+    adv --keyserver hkp://keyserver.ubuntu.com:80 \
+    --recv-keys 9165938D90FDDD2E
+
+apt-key --keyring /usr/share/keyrings/external-archives-keyring.gpg \
+    adv --keyserver hkp://keyserver.ubuntu.com:80 \
+    --recv-keys CAA5E9C8755D21A0 975DC25C4E730A3C
+
+mkdir -p /mnt/usr/share/keyrings
+cp /usr/share/keyrings/{debian,raspbian,external}-*-keyring.gpg /mnt/usr/share/keyrings/
